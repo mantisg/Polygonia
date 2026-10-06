@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polygonia: Escape from 2-D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="vignette"></div>
+<div id="ach-toasts"></div>
+
+<!-- in-run HUD -->
+<div id="hud" class="hidden">
+  <div id="xpbar"><div id="xpfill"></div><span id="lvl">LV 1</span></div>
+  <div id="timer">00:00</div>
+  <div id="counters"><span id="kills">0</span> defeated<br><span id="moolah">0</span> moolah</div>
+  <div id="inv"><div id="inv-w"></div><div id="inv-p"></div></div>
+  <div id="bossbar" class="hidden"><div id="bossname">KINGTAURUS</div><div id="bossbg"><div id="bossfill"></div></div></div>
+  <div id="banner"></div>
+</div>
+
+<!-- screens -->
+<div id="screen-loading" class="screen">
+  <div class="loading-box"><div class="marker big">Polygonia</div><div>unfolding the paper...</div><div id="loadbar"><div id="loadfill"></div></div></div>
+</div>
+
+<div id="screen-title" class="screen hidden">
+  <img id="title-bg" src="assets/Title_Screen.png" alt="Polygonia: Escape from 2-D">
+  <img id="title-start" class="btn" src="assets/Start-Button.png" alt="Start">
+  <div id="title-buttons">
+    <button id="title-archive" class="pbtn big">The Archive<span id="arch-dot" class="dot hidden"></span></button>
+    <button id="title-options" class="pbtn big">Options</button>
+  </div>
+  <div id="title-best"></div>
+</div>
+
+<div id="screen-select" class="screen hidden paper">
+  <h1 class="marker">Choose your shape</h1>
+  <div id="cards"></div>
+  <div class="row" style="margin-top:28px;align-items:center">
+    <img id="select-back" class="btn small" src="assets/Exit-Button.png" alt="Back">
+    <button id="select-archive" class="pbtn big">The Archive</button>
+  </div>
+</div>
+
+<div id="screen-level" class="screen hidden overlay">
+  <h2 id="level-title" class="marker">LEVEL UP!</h2>
+  <div id="choices"></div>
+  <button id="reroll" class="pbtn hidden"></button>
+  <div class="hint">click a card or press 1 - 5</div>
+</div>
+
+<div id="screen-pause" class="screen hidden overlay">
+  <h2 class="marker">Paused</h2>
+  <div id="pause-inv"></div>
+  <div class="row">
+    <img id="pause-menu" class="btn small" src="assets/Menu-Button.png" alt="Menu">
+    <button id="pause-options" class="pbtn big" style="align-self:center">Options</button>
+    <img id="pause-exit" class="btn small" src="assets/Exit-Button.png" alt="Exit">
+  </div>
+  <div class="hint"><a id="pause-resume">Resume (Esc)</a></div>
+</div>
+
+<div id="screen-end" class="screen hidden overlay">
+  <div id="end-card" class="paper-card">
+    <h2 id="end-title" class="marker">Crumpled!</h2>
+    <div id="end-sub"></div>
+    <div id="end-stats"></div>
+    <div class="row">
+      <img id="end-again" class="btn small" src="assets/Start-Button.png" alt="Play again">
+      <button id="end-archive" class="pbtn big">The Archive</button>
+      <img id="end-menu" class="btn small" src="assets/Menu-Button.png" alt="Menu">
+    </div>
+  </div>
+</div>
+
+<div id="screen-archive" class="screen hidden paper">
+  <div class="arch-top">
+    <h1 class="marker">The Archive</h1>
+    <div class="arch-bal"><span id="arch-bal">0</span> moolah</div>
+    <button id="arch-back" class="pbtn big">Back (Esc)</button>
+  </div>
+  <div class="arch-sub">Everything you earn in a run is filed here. Spend it to get a little stronger for the next one.</div>
+  <div id="arch-body"></div>
+</div>
+
+<div id="screen-options" class="screen hidden paper">
+  <div class="arch-top">
+    <h1 class="marker">Options</h1>
+    <button id="opt-back" class="pbtn big">Back (Esc)</button>
+  </div>
+  <div id="opt-body"></div>
+</div>
+
+<div id="fps" class="hidden">60 fps</div>
+
+<button id="mute" title="Toggle sound (M)">&#9835;</button>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

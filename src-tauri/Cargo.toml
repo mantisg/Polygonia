@@ -1,0 +1,36 @@
+[package]
+name = "polygonia-escape-2d"
+version = "0.1.0"
+description = "Polygonia: Escape from 2-D - a Vampire Survivors-style roguelike where the player and every enemy are 2-D shapes"
+authors = ["Josh"]
+license = ""
+repository = ""
+edition = "2024"
+rust-version = "1.90"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.7.1" }
+# only used by build.rs's steam-redistributable copy step, and only when the `steam` feature is on
+serde_json = "1.0"
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.12.1" }
+tauri-plugin-log = "2"
+# Steamworks bindings - see src/achievements.rs. The crate vendors the public Steamworks SDK
+# redistributable itself, so this builds with no manual SDK download. Off by default so a plain
+# `cargo tauri build`/`dev` never needs it; turn it on with `--features steam` (see README-TAURI.md),
+# or flip the `default` list below once you're ready to ship with Steam support baked in.
+steamworks = { version = "0.13", optional = true }
+
+[features]
+default = []
+steam = ["dep:steamworks"]
